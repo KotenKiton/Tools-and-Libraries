@@ -38,8 +38,8 @@ public class CssXpathExamples {
         $("input.inputtext.login_form_input_box").setValue("123");
         // input это тип элемента
 
-        $(byText("Hello,qa.guru"));// поиск по тексту
-        $(withText("Hello qa.guru"));// Поиск по строке( какому то куску)
+        //$(byText("Hello,qa.guru"));// поиск по тексту
+        //$(withText("Hello qa.guru"));// Поиск по строке( какому то куску)
 
         // рекомендуют пользоваться СSS. CSS + Selenide закрывает все задачи.
 

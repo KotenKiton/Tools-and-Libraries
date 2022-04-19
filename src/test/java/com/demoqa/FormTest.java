@@ -14,13 +14,13 @@ public class FormTest {
     @BeforeAll
     static void setUp() {
         Configuration.holdBrowserOpen = true; // браузер не будет закрываться после тестов.
-        Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ
-        Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ.
+        Configuration.browserSize = "1920x1080"; // задать желаемый размер экрана.
 
     }
     @Test
     void fillFormTest() {
-        // Steps
+        // Шаги
 
         open("/automation-practice-form");
         $("[id=firstName]").setValue("James");
@@ -41,9 +41,7 @@ public class FormTest {
         $("#subjectsInput").sendKeys(Keys.ENTER);
         $(".custom-checkbox:nth-child(1) > .custom-control-label").click();// Hobbies
         $(".custom-checkbox:nth-child(2) > .custom-control-label").click();// Hobbies
-        $("#uploadPicture").uploadFromClasspath("image/Me.png");
-        $("#currentAddress").click();
-        $("#currentAddress").click();
+        $("#uploadPicture").uploadFromClasspath("image/Me.png"); // Downloand picture
         $("#currentAddress").val("My street");
         $("#state").click();
         $("#react-select-3-option-1").click();

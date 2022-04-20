@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class FormTest {
 
@@ -23,6 +22,13 @@ public class FormTest {
         // Шаги
 
         open("/automation-practice-form");
+        //$("practice-form-wrapper").shouldHave(text("Student Registration Form"));
+
+        executeJavaScript("$('footer').remove()");// Не совсем понимаю,зачем нужны эти строки ?
+        executeJavaScript("$('#fixedban').remove()");//
+
+        //Ввод данных
+
         $("[id=firstName]").setValue("James");
         $("[id=lastName]").setValue("Bond");
         $("[id=userEmail]").setValue("James@Bond.com");
@@ -49,9 +55,17 @@ public class FormTest {
         $("#react-select-4-option-1").click();
         $("#submit").click();
 
-////////////////////////////////////////////////////////////////////////////////////
+        // Проверки
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+
+        // Делал ошибку в том,что обращался к классу через #.
+        // class="table-responsive" .table-responsive это класс и обращение идёт через точку.
+        // Самые простые проверки.
+        $(".table-responsive").shouldHave(text("James Bond"),text("James@Bond.com"),text("Male"),
+                text("8800555353"),text("20 July,1994"),text("Computer Science"),text("Sports, Reading"),
+                text("James Bond"),text("Me.png"),text("My street"),text("Uttar Pradesh Lucknow"));
+
 
 
 

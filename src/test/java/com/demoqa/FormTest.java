@@ -15,25 +15,20 @@ public class FormTest {
         Configuration.holdBrowserOpen = true; // браузер не будет закрываться после тестов.
         Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ.
         Configuration.browserSize = "1920x1080"; // задать желаемый размер экрана.
-
     }
     @Test
     void fillFormTest() {
-        // Шаги
-
+        // Подготовка.
         open("/automation-practice-form");
         //$("practice-form-wrapper").shouldHave(text("Student Registration Form"));
-
-        executeJavaScript("$('footer').remove()");// Не совсем понимаю,зачем нужны эти строки ?
-        executeJavaScript("$('#fixedban').remove()");//
-
-        //Ввод данных
-
-        $("[id=firstName]").setValue("James");
-        $("[id=lastName]").setValue("Bond");
-        $("[id=userEmail]").setValue("James@Bond.com");
+        executeJavaScript("$('footer').remove()");// Отключает футер.
+        executeJavaScript("$('#fixedban').remove()");// Отключает рекламу.
+        //Шаги.
+        $("#firstName").setValue("James");
+        $("#lastName").setValue("Bond");
+        $("#userEmail").setValue("James@Bond.com");
         $(".custom-radio:nth-child(1) > .custom-control-label").click();
-        $("[id=userNumber]").setValue("88005553535");
+        $("#userNumber").setValue("88005553535");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").click();
         $(".react-datepicker__month-select").selectOption("July");
@@ -45,31 +40,22 @@ public class FormTest {
         $("#subjectsInput").sendKeys(Keys.DOWN);
         $("#subjectsInput").sendKeys(Keys.DOWN);
         $("#subjectsInput").sendKeys(Keys.ENTER);
-        $(".custom-checkbox:nth-child(1) > .custom-control-label").click();// Hobbies
-        $(".custom-checkbox:nth-child(2) > .custom-control-label").click();// Hobbies
-        $("#uploadPicture").uploadFromClasspath("image/Me.png"); // Downloand picture
+        $(".custom-checkbox:nth-child(1) > .custom-control-label").click();// Hobbies.
+        $(".custom-checkbox:nth-child(2) > .custom-control-label").click();// Hobbies.
+        $("#uploadPicture").uploadFromClasspath("Image/Me.png"); // Select picture.
         $("#currentAddress").val("My street");
         $("#state").click();
         $("#react-select-3-option-1").click();
         $("#city").click();
         $("#react-select-4-option-1").click();
         $("#submit").click();
-
-        // Проверки
-
+        //Проверки.
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-
         // Делал ошибку в том,что обращался к классу через #.
-        // class="table-responsive" .table-responsive это класс и обращение идёт через точку.
-        // Самые простые проверки.
+        // class="table-responsive" .table-responsive это класс и обращение идёт через точку. Самые простые проверки.
         $(".table-responsive").shouldHave(text("James Bond"),text("James@Bond.com"),text("Male"),
                 text("8800555353"),text("20 July,1994"),text("Computer Science"),text("Sports, Reading"),
                 text("James Bond"),text("Me.png"),text("My street"),text("Uttar Pradesh Lucknow"));
-
-
-
-
-
 
     }
 }

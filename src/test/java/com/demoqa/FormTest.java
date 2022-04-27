@@ -20,7 +20,7 @@ public class FormTest {
     void fillFormTest() {
         // Подготовка.
         open("/automation-practice-form");
-        //$("practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('footer').remove()");// Отключает футер.
         executeJavaScript("$('#fixedban').remove()");// Отключает рекламу.
         //Шаги.

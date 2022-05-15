@@ -7,14 +7,10 @@ repositories {
 
 dependencies {
     testImplementation( // ОБЛАСТЬ видимости.
-            "com.codeborne:selenide:6.4.0", // selenide СЕЛЕНИД ДОЛЖЕН БЫТЬ ВВЕРХУ!
-            "com.github.javafaker:javafaker:1.0.2", // Faker для рандома.
-            "org.junit.jupiter:junit-jupiter:5.8.2", // Это максимально полный набор Junit( включать нужно такой)
+             "com.codeborne:selenide:6.4.0", // selenide СЕЛЕНИД ДОЛЖЕН БЫТЬ ВВЕРХУ!
+            "com.github.javafaker:javafaker:1.0.2", // faker для рандома ввода.
+            "org.junit.jupiter:junit-jupiter:5.8.2",// Это максимально полный набор Junit( включать нужно такой)
             "org.slf4j:slf4j-simple:1.7.36") // логирование ( чтобы убрать ошибку)
-
-
-
-    'com.github.javafaker:javafaker:1.0.2'
 }
 
 tasks.withType(JavaCompile) {

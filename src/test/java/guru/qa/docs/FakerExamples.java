@@ -26,8 +26,7 @@ public class FakerExamples {
         System.out.println(faker.address().fullAddress());
 
         Faker fakerRu = new Faker(new Locale("ru"));
-        System.out.println(faker.address().fullAddress());
-
+        System.out.println(faker.address().lastName());
 
     }
 }

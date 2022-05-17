@@ -34,12 +34,13 @@ public class FormTest {
         // Подготовка.
         RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
-        registrationFormPage.openPage();
-        registrationFormPage.setFirstName(firstName);
-        registrationFormPage.setLastName(lastName);
-        registrationFormPage.setUserEmail(email);
-        registrationFormPage.setGenderUser(gender);
-        registrationFormPage.setUserNumber(userNumber);
+        registrationFormPage
+                .openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(email)
+                .setGenderUser(gender)
+                .setUserNumber(userNumber);
 
         //Шаги.
         $("#dateOfBirthInput").click();

@@ -5,22 +5,33 @@ import com.demoqa.pages.RegistrationFormPage;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Keys;
+
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static java.lang.String.format;
 
 public class FormTest {
 
+    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
     Faker faker = new Faker();
 
-    String firstName = faker.name().firstName(),
-            lastName = faker.name().lastName(),
-            email = faker.internet().emailAddress(),
+    // parameters
+    String FirstName = faker.name().firstName(),
+            LastName = faker.name().lastName(),
+            InputEmail = faker.internet().emailAddress(),
             gender = faker.demographic().sex(),
-            currentAddress = faker.rickAndMorty().location(),
-            userNumber = faker.phoneNumber().subscriberNumber(10);
-
+            address = faker.address().fullAddress(),
+            MobilePhone = faker.phoneNumber().subscriberNumber(10),
+            day = "19",
+            month = "January",
+            year = "2000",
+            dayOfBirthday = format("%s %s,%s", day, month, year),
+            subject = "Computer Science",
+            hobbies = "Sports",
+            photo = "Me.png",
+            state = "Haryana",
+            city = "Karnal";
 
     @BeforeAll
     static void setUp() {
@@ -31,38 +42,24 @@ public class FormTest {
 
     @Test
     void fillFormTest() {
-        // Подготовка.
-        RegistrationFormPage registrationFormPage = new RegistrationFormPage();
-
         registrationFormPage
                 .openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setUserEmail(email)
+                .setFirstName(FirstName)
+                .setLastName(LastName)
+                .setUserEmail(InputEmail)
                 .setGenderUser(gender)
-                .setUserNumber(userNumber);
+                .setUserNumber(MobilePhone)
+                .setBirthDate(day, month, year)
+                .setSubjects(subject)
+                .setHobby(hobbies)
+                .setPhoto(photo)
+                .setCurrentAddress(address)
+                .setState(state)
+                .setCity(city)
+                .submitForm();
 
-        //Шаги.
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption("July");
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption("1994");
-        $(".react-datepicker__day--020").click();
-        $(".subjects-auto-complete__value-container").click();
-        $("#subjectsInput").val("m");
-        $("#subjectsInput").sendKeys(Keys.DOWN);
-        $("#subjectsInput").sendKeys(Keys.DOWN);
-        $("#subjectsInput").sendKeys(Keys.ENTER);
-        $(".custom-checkbox:nth-child(1) > .custom-control-label").click();// Hobbies.
-        $(".custom-checkbox:nth-child(2) > .custom-control-label").click();// Hobbies.
-        $("#uploadPicture").uploadFromClasspath("Image/Me.png"); // Select picture.
-        $("#currentAddress").val(currentAddress);
-        $("#state").click();
-        $("#react-select-3-option-1").click();
-        $("#city").click();
-        $("#react-select-4-option-1").click();
-        $("#submit").click();
+
+
         //Проверки.
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         // Делал ошибку в том,что обращался к классу через #.

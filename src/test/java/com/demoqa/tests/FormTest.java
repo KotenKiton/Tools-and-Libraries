@@ -6,18 +6,21 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 
 public class FormTest {
-
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
     Faker faker = new Faker();
 
+    @BeforeAll
+    static void setUp() {
+        Configuration.holdBrowserOpen = true;
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1920x1080";
+    }
+
     // parameters
-    String FirstName = faker.name().firstName(),
+    String  FirstName = faker.name().firstName(),
             LastName = faker.name().lastName(),
             InputEmail = faker.internet().emailAddress(),
             gender = faker.demographic().sex(),
@@ -27,18 +30,13 @@ public class FormTest {
             month = "January",
             year = "2000",
             dayOfBirthday = format("%s %s,%s", day, month, year),
+            FullName = format("%s %s", FirstName, LastName),
             subject = "Computer Science",
             hobbies = "Sports",
             photo = "Me.png",
             state = "Haryana",
-            city = "Karnal";
-
-    @BeforeAll
-    static void setUp() {
-        Configuration.holdBrowserOpen = true; // браузер не будет закрываться после тестов.
-        Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ.
-        Configuration.browserSize = "1920x1080"; // задать желаемый размер экрана.
-    }
+            city = "Karnal",
+            EndForm = "Thanks for submitting the form";
 
     @Test
     void fillFormTest() {
@@ -56,17 +54,20 @@ public class FormTest {
                 .setCurrentAddress(address)
                 .setState(state)
                 .setCity(city)
-                .submitForm();
+                .submitForm()
 
-
-
-        //Проверки.
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        // Делал ошибку в том,что обращался к классу через #.
-        // class="table-responsive" .table-responsive это класс и обращение идёт через точку. Самые простые проверки.
-        $(".table-responsive").shouldHave(text("James Bond"), text("James@Bond.com"), text("Male"),
-                text("8800555353"), text("20 July,1994"), text("Computer Science"), text("Sports, Reading"),
-                text("James Bond"), text("Me.png"), text("My street"), text("Uttar Pradesh Lucknow"));
+                //Asserts
+                .checkTitle(EndForm)
+                .checkResult("Student Name", FullName)
+                .checkResult("Student Email", InputEmail)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", MobilePhone)
+                .checkResult("Date of Birth", dayOfBirthday)
+                .checkResult("Subjects", subject)
+                .checkResult("Hobbies", hobbies)
+                .checkResult("Picture", photo)
+                .checkResult("Address", address)
+                .checkResult("State and City", state + " " + city);
 
     }
 }

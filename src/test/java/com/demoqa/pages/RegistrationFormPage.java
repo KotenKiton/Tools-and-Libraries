@@ -13,19 +13,19 @@ public class RegistrationFormPage {
     CalendarComponents calendar = new CalendarComponents();
 
     //Locators
-    SelenideElement FirstName = $("#firstName");
-    SelenideElement LastName = $("#lastName");
-    SelenideElement InputEmail = $("#userEmail");
-    SelenideElement Gender = $("#genterWrapper");
-    SelenideElement MobilePhone = $("#userNumber");
-    SelenideElement DateOfBirth = $("#dateOfBirthInput");
-    SelenideElement InputSubject = $("#subjectsInput");
-    SelenideElement inputHobby = $("#hobbiesWrapper");
-    SelenideElement UploadPhoto = $("#uploadPicture");
-    SelenideElement InputAddress = $("#currentAddress");
-    SelenideElement State = $("#state");
-    SelenideElement City = $("#city");
-
+    SelenideElement FirstName = $("#firstName"),
+     LastName = $("#lastName"),
+     InputEmail = $("#userEmail"),
+     Gender = $("#genterWrapper"),
+     MobilePhone = $("#userNumber"),
+     DateOfBirth = $("#dateOfBirthInput"),
+     InputSubject = $("#subjectsInput"),
+     inputHobby = $("#hobbiesWrapper"),
+     UploadPhoto = $("#uploadPicture"),
+     InputAddress = $("#currentAddress"),
+     State = $("#state"),
+     City = $("#city"),
+     EndFScreen = $("#example-modal-sizes-title-lg");
 
     //Actions
     public RegistrationFormPage openPage() {
@@ -86,10 +86,9 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setPhoto(String Image) { // Parametr Image never used
-        UploadPhoto.uploadFromClasspath("Image/Me.png");
-        //путь нужно указать полностью! начиная с папки Image. иначе "Me.png" будет просто строка с ошибкой file NFound
-
+    public RegistrationFormPage setPhoto(String Image) {
+        UploadPhoto.uploadFromClasspath("Image/" + Image);
+        // таким оразом название картинки не захардкоженно.( могу менять и название и
         return this;
     }
 
@@ -99,20 +98,36 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setState (String value) {
-        InputAddress.setValue(value);
+    public RegistrationFormPage setState(String value) {
+        State.click();
+        $(byText(value)).scrollTo().click();
 
         return this;
     }
 
-    public RegistrationFormPage setCity (String value) {
-        InputAddress.setValue(value);
+    public RegistrationFormPage setCity(String value) {
+        City.click();
+        $(byText(value)).scrollTo().click();
 
         return this;
     }
 
-    public RegistrationFormPage submitForm () {
+    public RegistrationFormPage submitForm() {
         $("#submit").pressEnter();
+
+        return this;
+    }
+
+    public RegistrationFormPage checkTitle(String title) {
+        EndFScreen.shouldHave(text(title));
+
+        return this;
+    }
+
+
+    public RegistrationFormPage checkResult(String key, String value) {
+        $(".table-responsive").$(byText(key))
+                .parent().shouldHave(text(value));
 
         return this;
     }

@@ -5,7 +5,6 @@ import com.demoqa.pages.RegistrationFormPage;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import static java.lang.String.format;
 
 public class FormTest {

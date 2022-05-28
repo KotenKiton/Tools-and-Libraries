@@ -5,6 +5,7 @@ import com.demoqa.pages.RegistrationFormPage;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import static java.lang.String.format;
 
 public class FormTest {
@@ -19,33 +20,33 @@ public class FormTest {
     }
 
     // parameters
-    String  FirstName = faker.name().firstName(),
-            LastName = faker.name().lastName(),
+    String firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
             InputEmail = faker.internet().emailAddress(),
             gender = faker.demographic().sex(),
             address = faker.address().fullAddress(),
-            MobilePhone = faker.phoneNumber().subscriberNumber(10),
+            mobilePhone = faker.phoneNumber().subscriberNumber(10),
             day = "19",
             month = "January",
             year = "2000",
             dayOfBirthday = format("%s %s,%s", day, month, year),
-            FullName = format("%s %s", FirstName, LastName),
+            fullName = format("%s %s", firstName, lastName),
             subject = "Computer Science",
             hobbies = "Sports",
             photo = "Me.png",
             state = "Haryana",
             city = "Karnal",
-            EndForm = "Thanks for submitting the form";
+            endForm = "Thanks for submitting the form";
 
     @Test
     void fillFormTest() {
         registrationFormPage
                 .openPage()
-                .setFirstName(FirstName)
-                .setLastName(LastName)
+                .setFirstName(firstName)
+                .setLastName(lastName)
                 .setUserEmail(InputEmail)
                 .setGenderUser(gender)
-                .setUserNumber(MobilePhone)
+                .setUserNumber(mobilePhone)
                 .setBirthDate(day, month, year)
                 .setSubjects(subject)
                 .setHobby(hobbies)
@@ -55,12 +56,12 @@ public class FormTest {
                 .setCity(city)
                 .submitForm()
 
-                //Asserts
-                .checkTitle(EndForm)
-                .checkResult("Student Name", FullName)
+                //asserts
+                .checkTitle(endForm)
+                .checkResult("Student Name", fullName)
                 .checkResult("Student Email", InputEmail)
                 .checkResult("Gender", gender)
-                .checkResult("Mobile", MobilePhone)
+                .checkResult("Mobile", mobilePhone)
                 .checkResult("Date of Birth", dayOfBirthday)
                 .checkResult("Subjects", subject)
                 .checkResult("Hobbies", hobbies)

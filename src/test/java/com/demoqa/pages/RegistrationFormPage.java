@@ -2,6 +2,7 @@ package com.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponents;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -12,19 +13,20 @@ public class RegistrationFormPage {
     CalendarComponents calendar = new CalendarComponents();
 
     //Locators
-    SelenideElement FirstName = $("#firstName"),
-     LastName = $("#lastName"),
-     InputEmail = $("#userEmail"),
-     Gender = $("#genterWrapper"),
-     MobilePhone = $("#userNumber"),
-     DateOfBirth = $("#dateOfBirthInput"),
-     InputSubject = $("#subjectsInput"),
-     inputHobby = $("#hobbiesWrapper"),
-     UploadPhoto = $("#uploadPicture"),
-     InputAddress = $("#currentAddress"),
-     State = $("#state"),
-     City = $("#city"),
-     EndFScreen = $("#example-modal-sizes-title-lg");
+    SelenideElement
+            firstName = $("#firstName"),
+            lastName = $("#lastName"),
+            inputEmail = $("#userEmail"),
+            gender = $("#genterWrapper"),
+            mobilePhone = $("#userNumber"),
+            dateOfBirth = $("#dateOfBirthInput"),
+            inputSubject = $("#subjectsInput"),
+            inputHobby = $("#hobbiesWrapper"),
+            uploadPhoto = $("#uploadPicture"),
+            inputAddress = $("#currentAddress"),
+            state = $("#state"),
+            city = $("#city"),
+            endFScreen = $("#example-modal-sizes-title-lg");
 
     //Actions
     public RegistrationFormPage openPage() {
@@ -37,44 +39,44 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setFirstName(String value) {
-        FirstName.setValue(value);
+        firstName.setValue(value);
 
         return this;
     }
 
     public RegistrationFormPage setLastName(String value) {
-        LastName.setValue(value);
+        lastName.setValue(value);
 
         return this;
     }
 
     public RegistrationFormPage setUserEmail(String value) {
-        InputEmail.setValue(value);
+        inputEmail.setValue(value);
 
         return this;
     }
 
     public RegistrationFormPage setGenderUser(String value) {
-        Gender.$(byText(value)).click();
+        gender.$(byText(value)).click();
 
         return this;
     }
 
     public RegistrationFormPage setBirthDate(String day, String month, String year) {
-        DateOfBirth.click();
+        dateOfBirth.click();
         calendar.setDate(day, month, year);
 
         return this;
     }
 
     public RegistrationFormPage setUserNumber(String value) {
-        MobilePhone.setValue(value);
+        mobilePhone.setValue(value);
 
         return this;
     }
 
     public RegistrationFormPage setSubjects(String subject) {
-        InputSubject.setValue(subject).pressEnter(); // Если не дописать нажми Enter то текст Предмета не будет введён!
+        inputSubject.setValue(subject).pressEnter(); // Если не дописать нажми Enter то текст Предмета не будет введён!
 
         return this;
     }
@@ -86,26 +88,26 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setPhoto(String Image) {
-        UploadPhoto.uploadFromClasspath("Image/" + Image);
+        uploadPhoto.uploadFromClasspath("Image/" + Image);
         // таким оразом название картинки не захардкоженно.( могу менять и название и
         return this;
     }
 
     public RegistrationFormPage setCurrentAddress(String address) {
-        InputAddress.setValue(address);
+        inputAddress.setValue(address);
 
         return this;
     }
 
     public RegistrationFormPage setState(String value) {
-        State.click();
+        state.click();
         $(byText(value)).scrollTo().click();
 
         return this;
     }
 
     public RegistrationFormPage setCity(String value) {
-        City.click();
+        city.click();
         $(byText(value)).scrollTo().click();
 
         return this;
@@ -118,7 +120,7 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage checkTitle(String title) {
-        EndFScreen.shouldHave(text(title));
+        endFScreen.shouldHave(text(title));
 
         return this;
     }

@@ -12,10 +12,11 @@ repositories {
 
 dependencies {
     testImplementation( // ОБЛАСТЬ видимости.
-            "com.codeborne:selenide:6.4.0", // selenide СЕЛЕНИД ДОЛЖЕН БЫТЬ ВВЕРХУ!
-            "org.junit.jupiter:junit-jupiter:5.8.2", // без API полный набор
-            "org.slf4j:slf4j-simple:1.7.36", // логирование ( чтобы убрать ошибку)
-            "io.qameta.allure:allure-selenide:2.18.1" //
+            'com.codeborne:selenide:6.9.0', // selenide СЕЛЕНИД ДОЛЖЕН БЫТЬ ВВЕРХУ!
+            'org.junit.jupiter:junit-jupiter:5.9.0', // без API полный набор
+            'org.slf4j:slf4j-simple:2.0.3', // логирование ( чтобы убрать ошибку)
+            "com.github.javafaker:javafaker:1.0.2",  // Добавил фейкер чтобы тесты не были красными.
+            'io.qameta.allure:allure-selenide:2.19.0' // Алюр
     )
 }
 

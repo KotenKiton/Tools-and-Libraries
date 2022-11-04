@@ -19,7 +19,6 @@ public class RegistrationFormWithRandomUtilsTests {
 
     String expectedFullName = format("%s %s", firstName, lastName);
 
-
     @BeforeAll
     static void setUp() {
         Configuration.holdBrowserOpen = true; // браузер не будет закрываться после тестов.

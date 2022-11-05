@@ -1,4 +1,4 @@
-package com.demoqa;
+package guru.qa.tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,8 +7,18 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static guru.qa.utils.RandomUtils.getRandomEmail;
+import static guru.qa.utils.RandomUtils.getRandomString;
+import static java.lang.String.format;
 
-public class FormTest {
+public class RegistrationFormWithRandomUtilsTests {
+
+    String firstName = getRandomString(10),
+            lastName = getRandomString(10),
+            email = getRandomEmail();
+
+    String expectedFullName = format("%s %s", firstName, lastName);
+
 
     @BeforeAll
     static void setUp() {
@@ -16,6 +26,7 @@ public class FormTest {
         Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ.
         Configuration.browserSize = "1920x1080"; // задать желаемый размер экрана.
     }
+
     @Test
     void fillFormTest() {
         // Подготовка.
@@ -24,9 +35,9 @@ public class FormTest {
         executeJavaScript("$('footer').remove()");// Отключает футер.
         executeJavaScript("$('#fixedban').remove()");// Отключает рекламу.
         //Шаги.
-        $("#firstName").setValue("James");
-        $("#lastName").setValue("Bond");
-        $("#userEmail").setValue("James@Bond.com");
+        $("#firstName").val(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(email);
         $(".custom-radio:nth-child(1) > .custom-control-label").click();
         $("#userNumber").setValue("88005553535");
         $("#dateOfBirthInput").click();
@@ -53,9 +64,11 @@ public class FormTest {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         // Делал ошибку в том,что обращался к классу через #.
         // class="table-responsive" .table-responsive это класс и обращение идёт через точку. Самые простые проверки.
-        $(".table-responsive").shouldHave(text("James Bond"),text("James@Bond.com"),text("Male"),
-                text("8800555353"),text("20 July,1994"),text("Computer Science"),text("Sports, Reading"),
-                text("James Bond"),text("Me.png"),text("My street"),text("Uttar Pradesh Lucknow"));
+        $(".table-responsive").shouldHave(text(firstName + "" + lastName), text(email), text("Male"),
+                text("8800555353"), text("20 July,1994"), text("Computer Science"), text("Sports, Reading"),
+                text("James Bond"), text("Me.png"), text("My street"), text("Uttar Pradesh Lucknow"));
+
+        //$(".table-responsive").shouldHave(text(expectedFullName), text(email);
 
     }
 }

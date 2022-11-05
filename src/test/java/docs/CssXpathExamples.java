@@ -26,7 +26,6 @@ public class CssXpathExamples {
         $x("//*[@id='email']").setValue("123");
         $(byXpath("//*[@id='email']")).setValue("123");
 
-
         $(byName("email")).setValue("123");
 
     //data-testid=email data-testid атрибут - его значение email

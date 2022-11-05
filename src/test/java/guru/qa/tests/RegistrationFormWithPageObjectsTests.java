@@ -17,7 +17,7 @@ public class RegistrationFormWithPageObjectsTests {
     static void setUp() {
         Configuration.holdBrowserOpen = true; // браузер не будет закрываться после тестов.
         Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ.
-        Configuration.browserSize = "1920x1080"; // задать желаемый размер экрана.
+        Configuration.browserSize = "1920x1080";
     }
 
     @Test

@@ -28,9 +28,9 @@ public class RegistrationFormWithFakerTests {
 
     @BeforeAll
     static void setUp() {
-        Configuration.holdBrowserOpen = true; // браузер не будет закрываться после тестов.
-        Configuration.baseUrl = "https://demoqa.com"; // Задать базовый УРЛ.
-        Configuration.browserSize = "1920x1080"; // задать желаемый размер экрана.
+        Configuration.holdBrowserOpen = true;
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1920x1080";
     }
 
     @Test
@@ -73,8 +73,5 @@ public class RegistrationFormWithFakerTests {
         $(".table-responsive").shouldHave(text(firstName + "" + lastName), text(email), text("Male"),
                 text("8800555353"), text("20 July,1994"), text("Computer Science"), text("Sports, Reading"),
                 text("James Bond"), text("Me.png"), text("My street"), text("Uttar Pradesh Lucknow"));
-
-        //$(".table-responsive").shouldHave(text(expectedFullName), text(email);
-
     }
 }
